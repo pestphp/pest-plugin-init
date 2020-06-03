@@ -7,9 +7,6 @@ namespace Pest\PluginInit;
 use Pest\Contracts\Plugins\HandlesArguments;
 use Pest\TestSuite;
 
-/**
- * @internal
- */
 final class Plugin implements HandlesArguments
 {
     private const INIT_OPTION = 'init';
@@ -25,14 +22,14 @@ final class Plugin implements HandlesArguments
             return $originals;
         }
 
-        $this->initialisePest();
+        $this->init($testSuite);
 
         exit(0);
     }
 
-    private function initialisePest(): void
+    private function init(TestSuite $testSuite): void
     {
-        $testsBaseDir = getcwd() . '/tests';
+        $testsBaseDir = "{$testSuite->rootPath}/tests";
 
         if (!is_dir($testsBaseDir)) {
             if (!mkdir($testsBaseDir) && !is_dir($testsBaseDir)) {
