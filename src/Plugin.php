@@ -14,6 +14,11 @@ final class Plugin implements HandlesArguments
 {
     private const INIT_OPTION = 'init';
 
+    private const STUBS = [
+        'Pest.php' => 'Pest.php',
+        'Helpers.php' => 'Helpers.php',
+    ];
+
     public function handleArguments(TestSuite $testSuite, array $originals): array
     {
         if (!isset($originals[1]) || $originals[1] !== self::INIT_OPTION) {
@@ -37,12 +42,7 @@ final class Plugin implements HandlesArguments
             echo "Created 'tests' directory\n";
         }
 
-        $stubs = [
-            'Pest.php'    => 'Pest.php',
-            'Helpers.php' => 'Helpers.php',
-        ];
-
-        foreach ($stubs as $from => $to) {
+        foreach (self::STUBS as $from => $to) {
             $fromPath = __DIR__ . "/../stubs/$from";
             $toPath   = "$testsBaseDir/$to";
 
