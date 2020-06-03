@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Pest\PluginInit;
 
 use Pest\Contracts\Plugins\HandlesArguments;
+use Pest\Exceptions\ShouldNotHappen;
 use Pest\TestSuite;
 
 final class Plugin implements HandlesArguments
@@ -12,7 +13,7 @@ final class Plugin implements HandlesArguments
     private const INIT_OPTION = 'init';
 
     private const STUBS = [
-        'Pest.php' => 'Pest.php',
+        'Pest.php'    => 'Pest.php',
         'Helpers.php' => 'Helpers.php',
     ];
 
@@ -33,7 +34,7 @@ final class Plugin implements HandlesArguments
 
         if (!is_dir($testsBaseDir)) {
             if (!mkdir($testsBaseDir) && !is_dir($testsBaseDir)) {
-                throw new \RuntimeException(sprintf('Directory "%s" was not created', $testsBaseDir));
+                throw ShouldNotHappen::fromMessage("Directory '$testsBaseDir' was not created");
             }
 
             echo "Created 'tests' directory\n";
