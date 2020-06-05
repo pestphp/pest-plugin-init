@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Pest\PluginInit;
+namespace Pest\Init;
 
 use Pest\Contracts\Plugins\HandlesArguments;
 use Pest\Exceptions\ShouldNotHappen;
 use Pest\TestSuite;
+use Symfony\Component\Console\Output\OutputInterface;
 
 final class Plugin implements HandlesArguments
 {
@@ -17,27 +18,39 @@ final class Plugin implements HandlesArguments
         'Helpers.php' => 'Helpers.php',
     ];
 
-    public function handleArguments(TestSuite $testSuite, array $originals): array
+    /** @var OutputInterface */
+    private $output;
+
+    /** @var TestSuite */
+    private $testSuite;
+
+    public function __construct(TestSuite $testSuite, OutputInterface $output)
+    {
+        $this->testSuite = $testSuite;
+        $this->output    = $output;
+    }
+
+    public function handleArguments(array $originals): array
     {
         if (!isset($originals[1]) || $originals[1] !== self::INIT_OPTION) {
             return $originals;
         }
 
-        $this->init($testSuite);
+        $this->init();
 
         exit(0);
     }
 
-    private function init(TestSuite $testSuite): void
+    private function init(): void
     {
-        $testsBaseDir = "{$testSuite->rootPath}/tests";
+        $testsBaseDir = "{$this->testSuite->rootPath}/tests";
 
         if (!is_dir($testsBaseDir)) {
             if (!mkdir($testsBaseDir) && !is_dir($testsBaseDir)) {
-                throw ShouldNotHappen::fromMessage("Directory '$testsBaseDir' was not created");
+                throw ShouldNotHappen::fromMessage("Directory `{$testsBaseDir}` was not created");
             }
 
-            echo "Created 'tests' directory\n";
+            $this->output->writeln('Created `tests` directory');
         }
 
         foreach (self::STUBS as $from => $to) {
@@ -45,18 +58,18 @@ final class Plugin implements HandlesArguments
             $toPath   = "$testsBaseDir/$to";
 
             if (file_exists($toPath)) {
-                echo "File 'tests/{$to}' already exists, skipped\n";
+                $this->output->writeln("File `tests/{$to}` already exists, skipped");
 
                 continue;
             }
 
             if (!copy($fromPath, $toPath)) {
-                throw new \RuntimeException("Failed to copy stub '$stubs' to '$toPath'");
+                throw ShouldNotHappen::fromMessage("Failed to copy stub `{$from}` to `{$toPath}`");
             }
 
-            echo "Created '{$to}' file\n";
+            $this->output->writeln("Created `{$to}` file");
         }
 
-        echo "Pest initialised!\n";
+        $this->output->writeln('Pest initialised!');
     }
 }
