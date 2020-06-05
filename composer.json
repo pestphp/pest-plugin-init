@@ -39,7 +39,7 @@
     "extra": {
         "pest": {
             "plugins": [
-                "Pest\\PluginInit\\Plugin"
+                "Pest\\Init\\Plugin"
             ]
         }
     },
