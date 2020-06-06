@@ -14,8 +14,8 @@ final class Plugin implements HandlesArguments
     private const INIT_OPTION = 'init';
 
     private const STUBS = [
-        'Pest.php'    => 'Pest.php',
-        'Helpers.php' => 'Helpers.php',
+        'Pest.php'    => 'tests/Pest.php',
+        'Helpers.php' => 'tests/Helpers.php',
     ];
 
     /** @var OutputInterface */
@@ -60,11 +60,11 @@ final class Plugin implements HandlesArguments
 
         foreach (self::STUBS as $from => $to) {
             $fromPath = __DIR__ . "/../stubs/$from";
-            $toPath   = "$testsBaseDir/$to";
+            $toPath   = "{$this->testSuite->rootPath}/$to";
 
             if (file_exists($toPath)) {
                 $this->output->writeln(sprintf(
-                    "<fg=yellow>[WARNING] File `%s` already exists, skipped</>",
+                    "<fg=yellow>[INFO] File `%s` already exists, skipped</>",
                     $to
                 );
 
