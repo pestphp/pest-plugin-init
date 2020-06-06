@@ -47,10 +47,15 @@ final class Plugin implements HandlesArguments
 
         if (!is_dir($testsBaseDir)) {
             if (!mkdir($testsBaseDir) && !is_dir($testsBaseDir)) {
-                throw ShouldNotHappen::fromMessage("Directory `{$testsBaseDir}` was not created");
+                $this->output->writeln(sprintf(
+                    "<fg=white;bg=red>[ERROR] Directory `%s` was not created</>",
+                    $testsBaseDir
+                ));
+
+                return;
             }
 
-            $this->output->writeln('Created `tests` directory');
+            $this->output->writeln('[OK] Created `tests` directory');
         }
 
         foreach (self::STUBS as $from => $to) {
@@ -58,18 +63,30 @@ final class Plugin implements HandlesArguments
             $toPath   = "$testsBaseDir/$to";
 
             if (file_exists($toPath)) {
-                $this->output->writeln("File `tests/{$to}` already exists, skipped");
+                $this->output->writeln(sprintf(
+                    "<fg=yellow>[WARNING] File `%s` already exists, skipped</>",
+                    $to
+                );
 
                 continue;
             }
 
             if (!copy($fromPath, $toPath)) {
-                throw ShouldNotHappen::fromMessage("Failed to copy stub `{$from}` to `{$toPath}`");
+                $this->output->writeln(sprintf(
+                    "<fg=white;bg=red>[WARNING] Failed to copy stub `%s` to `%s`</>",
+                    $from,
+                    $toPath
+                ));
+
+                continue;
             }
 
-            $this->output->writeln("Created `{$to}` file");
+            $this->output->writeln(sprintf(
+                "<fg=black;bg=green>[OK] Created `%s` file</>",
+                $to
+            ));
         }
 
-        $this->output->writeln('Pest initialised!');
+        $this->output->writeln('<fg=black;bg=green>[OK] Pest initialised!</>');
     }
 }
