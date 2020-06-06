@@ -1,6 +1,6 @@
 {
     "name": "pestphp/pest-plugin-init",
-    "description": "The Pest init plugin",
+    "description": "The Pest Init plugin",
     "keywords": [
         "php",
         "framework",
@@ -8,18 +8,21 @@
         "unit",
         "test",
         "testing",
-        "plugin"
+        "plugin",
+        "init"
     ],
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "pestphp/pest": "^0.2",
         "pestphp/pest-plugin": "^0.2"
     },
     "autoload": {
         "psr-4": {
             "Pest\\Init\\": "src/"
         }
+    },
+    "conflict": {
+        "pestphp/pest": "<0.2"
     },
     "require-dev": {
         "ergebnis/phpstan-rules": "^0.14.4",
