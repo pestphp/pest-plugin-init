@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Pest\Init;
 
 use Pest\Contracts\Plugins\HandlesArguments;
-use Pest\Exceptions\ShouldNotHappen;
 use Pest\TestSuite;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -48,7 +47,7 @@ final class Plugin implements HandlesArguments
         if (!is_dir($testsBaseDir)) {
             if (!mkdir($testsBaseDir) && !is_dir($testsBaseDir)) {
                 $this->output->writeln(sprintf(
-                    "<fg=white;bg=red>[ERROR] Directory `%s` was not created</>",
+                    '<fg=white;bg=red>[ERROR] Directory `%s` was not created</>',
                     $testsBaseDir
                 ));
 
@@ -64,16 +63,16 @@ final class Plugin implements HandlesArguments
 
             if (file_exists($toPath)) {
                 $this->output->writeln(sprintf(
-                    "<fg=yellow>[INFO] File `%s` already exists, skipped</>",
+                    '<fg=yellow>[INFO] File `%s` already exists, skipped</>',
                     $to
-                );
+                ));
 
                 continue;
             }
 
             if (!copy($fromPath, $toPath)) {
                 $this->output->writeln(sprintf(
-                    "<fg=white;bg=red>[WARNING] Failed to copy stub `%s` to `%s`</>",
+                    '<fg=white;bg=red>[WARNING] Failed to copy stub `%s` to `%s`</>',
                     $from,
                     $toPath
                 ));
@@ -82,7 +81,7 @@ final class Plugin implements HandlesArguments
             }
 
             $this->output->writeln(sprintf(
-                "<fg=black;bg=green>[OK] Created `%s` file</>",
+                '<fg=black;bg=green>[OK] Created `%s` file</>',
                 $to
             ));
         }
