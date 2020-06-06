@@ -1,6 +1,6 @@
 {
-    "name": "pestphp/pest-plugin-template",
-    "description": "My awesome plugin",
+    "name": "pestphp/pest-plugin-init",
+    "description": "The Pest Init plugin",
     "keywords": [
         "php",
         "framework",
@@ -8,24 +8,27 @@
         "unit",
         "test",
         "testing",
-        "plugin"
+        "plugin",
+        "init"
     ],
     "license": "MIT",
     "require": {
         "php": "^7.3",
-        "pestphp/pest": "^0.1"
+        "pestphp/pest-plugin": "^0.2"
     },
     "autoload": {
         "psr-4": {
-            "Pest\\PluginName\\": "src/"
+            "Pest\\Init\\": "src/"
         }
+    },
+    "conflict": {
+        "pestphp/pest": "<0.2"
     },
     "require-dev": {
         "ergebnis/phpstan-rules": "^0.14.4",
         "friendsofphp/php-cs-fixer": "^2.16.3",
         "phpstan/phpstan": "^0.12.25",
         "phpstan/phpstan-strict-rules": "^0.12.2",
-        "rector/rector": "^0.7.25",
         "symfony/var-dumper": "^5.0.8",
         "thecodingmachine/phpstan-strict-rules": "^0.12.0"
     },
@@ -35,9 +38,16 @@
         "sort-packages": true,
         "preferred-install": "dist"
     },
+    "extra": {
+        "pest": {
+            "plugins": [
+                "Pest\\Init\\Plugin"
+            ]
+        }
+    },
     "scripts": {
-        "lint": "rector process src && php-cs-fixer fix -v",
-        "test:lint": "php-cs-fixer fix -v --dry-run && rector process src --dry-run",
+        "lint": "php-cs-fixer fix -v",
+        "test:lint": "php-cs-fixer fix -v --dry-run",
         "test:types": "phpstan analyse --ansi",
         "test:unit": "pest --colors=always",
         "test": [
