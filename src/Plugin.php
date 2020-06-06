@@ -32,7 +32,7 @@ final class Plugin implements HandlesArguments
 
     public function handleArguments(array $originals): array
     {
-        if (!isset($originals[1]) || $originals[1] !== self::INIT_OPTION) {
+        if (!array_key_exists(1, $originals) || $originals[1] !== self::INIT_OPTION) {
             return $originals;
         }
 
