@@ -82,11 +82,11 @@ final class Plugin implements HandlesArguments
             }
 
             $this->output->writeln(sprintf(
-                '<fg=black;bg=green>[OK] Created `%s` file</>',
+                '<fg=green>[OK] Created `%s` file</>',
                 $to
             ));
         }
 
-        $this->output->writeln('<fg=black;bg=green>[OK] Pest initialised!</>');
+        $this->output->writeln('<fg=green>[OK] Pest initialised!</>');
     }
 }
