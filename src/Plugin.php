@@ -48,7 +48,7 @@ final class Plugin implements HandlesArguments
         if (!is_dir($testsBaseDir)) {
             if (!mkdir($testsBaseDir) && !is_dir($testsBaseDir)) {
                 $this->output->writeln(sprintf(
-                    '<fg=white;bg=red>[ERROR] Directory `%s` was not created</>',
+                    "\n  <fg=white;bg=red;options=bold> ERROR </> Directory `%s` was not created.</>",
                     $testsBaseDir
                 ));
 
@@ -64,7 +64,7 @@ final class Plugin implements HandlesArguments
 
             if (file_exists($toPath)) {
                 $this->output->writeln(sprintf(
-                    '<fg=yellow>[INFO] File `%s` already exists, skipped</>',
+                    '  <fg=black;bg=yellow;options=bold> INFO </> File `%s` already exists, skipped.</>',
                     $to
                 ));
 
@@ -73,7 +73,7 @@ final class Plugin implements HandlesArguments
 
             if (!copy($fromPath, $toPath)) {
                 $this->output->writeln(sprintf(
-                    '<fg=white;bg=red>[WARNING] Failed to copy stub `%s` to `%s`</>',
+                    '<fg=black;bg=red>[WARNING] Failed to copy stub `%s` to `%s`</>',
                     $from,
                     $toPath
                 ));
@@ -82,11 +82,13 @@ final class Plugin implements HandlesArguments
             }
 
             $this->output->writeln(sprintf(
-                '<fg=green>[OK] Created `%s` file</>',
+                '  <fg=black;bg=green;options=bold> OK </> Created `%s` file.</>',
                 $to
             ));
         }
 
-        $this->output->writeln('<fg=green>[OK] Pest initialised!</>');
+        $this->output->writeln(
+            "\n  <fg=black;bg=green;options=bold> OK </> Pest initialised.</>",
+        );
     }
 }
