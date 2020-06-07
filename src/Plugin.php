@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Pest\Init;
 
 use Pest\Contracts\Plugins\HandlesArguments;
-use Pest\Exceptions\ShouldNotHappen;
 use Pest\TestSuite;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -14,8 +13,9 @@ final class Plugin implements HandlesArguments
     private const INIT_OPTION = 'init';
 
     private const STUBS = [
-        'Pest.php'    => 'Pest.php',
-        'Helpers.php' => 'Helpers.php',
+        'phpunit.xml' => 'phpunit.xml',
+        'Pest.php'    => 'tests/Pest.php',
+        'Helpers.php' => 'tests/Helpers.php',
     ];
 
     /** @var OutputInterface */
@@ -48,7 +48,7 @@ final class Plugin implements HandlesArguments
         if (!is_dir($testsBaseDir)) {
             if (!mkdir($testsBaseDir) && !is_dir($testsBaseDir)) {
                 $this->output->writeln(sprintf(
-                    "<fg=white;bg=red>[ERROR] Directory `%s` was not created</>",
+                    '<fg=white;bg=red>[ERROR] Directory `%s` was not created</>',
                     $testsBaseDir
                 ));
 
@@ -60,20 +60,20 @@ final class Plugin implements HandlesArguments
 
         foreach (self::STUBS as $from => $to) {
             $fromPath = __DIR__ . "/../stubs/$from";
-            $toPath   = "$testsBaseDir/$to";
+            $toPath   = "{$this->testSuite->rootPath}/$to";
 
             if (file_exists($toPath)) {
                 $this->output->writeln(sprintf(
-                    "<fg=yellow>[WARNING] File `%s` already exists, skipped</>",
+                    '<fg=yellow>[INFO] File `%s` already exists, skipped</>',
                     $to
-                );
+                ));
 
                 continue;
             }
 
             if (!copy($fromPath, $toPath)) {
                 $this->output->writeln(sprintf(
-                    "<fg=white;bg=red>[WARNING] Failed to copy stub `%s` to `%s`</>",
+                    '<fg=white;bg=red>[WARNING] Failed to copy stub `%s` to `%s`</>',
                     $from,
                     $toPath
                 ));
@@ -82,11 +82,11 @@ final class Plugin implements HandlesArguments
             }
 
             $this->output->writeln(sprintf(
-                "<fg=black;bg=green>[OK] Created `%s` file</>",
+                '<fg=green>[OK] Created `%s` file</>',
                 $to
             ));
         }
 
-        $this->output->writeln('<fg=black;bg=green>[OK] Pest initialised!</>');
+        $this->output->writeln('<fg=green>[OK] Pest initialised!</>');
     }
 }
