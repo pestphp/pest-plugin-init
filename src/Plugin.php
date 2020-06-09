@@ -31,10 +31,10 @@ final class Plugin implements HandlesArguments
         $this->output    = $output;
     }
 
-    public function handleArguments(array $originals): array
+    public function handleArguments(array $arguments): array
     {
-        if (!array_key_exists(1, $originals) || $originals[1] !== self::INIT_OPTION) {
-            return $originals;
+        if (!array_key_exists(1, $arguments) || $arguments[1] !== self::INIT_OPTION) {
+            return $arguments;
         }
 
         $this->init();
