@@ -13,9 +13,10 @@ final class Plugin implements HandlesArguments
     private const INIT_OPTION = 'init';
 
     private const STUBS = [
-        'phpunit.xml' => 'phpunit.xml',
-        'Pest.php'    => 'tests/Pest.php',
-        'Helpers.php' => 'tests/Helpers.php',
+        'phpunit.xml'     => 'phpunit.xml',
+        'Pest.php'        => 'tests/Pest.php',
+        'Helpers.php'     => 'tests/Helpers.php',
+        'ExampleTest.php' => 'tests/ExampleTest.php',
     ];
 
     /** @var OutputInterface */
@@ -30,10 +31,10 @@ final class Plugin implements HandlesArguments
         $this->output    = $output;
     }
 
-    public function handleArguments(array $originals): array
+    public function handleArguments(array $arguments): array
     {
-        if (!array_key_exists(1, $originals) || $originals[1] !== self::INIT_OPTION) {
-            return $originals;
+        if (!array_key_exists(1, $arguments) || $arguments[1] !== self::INIT_OPTION) {
+            return $arguments;
         }
 
         $this->init();
