@@ -13,9 +13,10 @@ final class Plugin implements HandlesArguments
     private const INIT_OPTION = 'init';
 
     private const STUBS = [
-        'phpunit.xml' => 'phpunit.xml',
-        'Pest.php'    => 'tests/Pest.php',
-        'Helpers.php' => 'tests/Helpers.php',
+        'phpunit.xml'     => 'phpunit.xml',
+        'Pest.php'        => 'tests/Pest.php',
+        'Helpers.php'     => 'tests/Helpers.php',
+        'ExampleTest.php' => 'tests/ExampleTest.php',
     ];
 
     /** @var OutputInterface */
