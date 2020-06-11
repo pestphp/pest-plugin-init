@@ -8,37 +8,56 @@ use Pest\Contracts\Plugins\HandlesArguments;
 use Pest\TestSuite;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @internal
+ */
 final class Plugin implements HandlesArguments
 {
-    private const INIT_OPTION = 'init';
+    /**
+     * The option the triggers the init job.
+     */
+    private const INIT_OPTION = '--init';
 
+    /**
+     * The files that will be created.
+     */
     private const STUBS = [
-        'phpunit.xml' => 'phpunit.xml',
-        'Pest.php'    => 'tests/Pest.php',
-        'Helpers.php' => 'tests/Helpers.php',
+        'phpunit.xml'     => 'phpunit.xml',
+        'Pest.php'        => 'tests/Pest.php',
+        'Helpers.php'     => 'tests/Helpers.php',
+        'ExampleTest.php' => 'tests/ExampleTest.php',
     ];
 
-    /** @var OutputInterface */
+    /**
+     * @var OutputInterface
+     */
     private $output;
 
-    /** @var TestSuite */
+    /**
+     * @var TestSuite
+     */
     private $testSuite;
 
+    /**
+     * Creates a new Plugin instance.
+     */
     public function __construct(TestSuite $testSuite, OutputInterface $output)
     {
         $this->testSuite = $testSuite;
         $this->output    = $output;
     }
 
-    public function handleArguments(array $originals): array
+    public function handleArguments(array $arguments): array
     {
-        if (!array_key_exists(1, $originals) || $originals[1] !== self::INIT_OPTION) {
-            return $originals;
+        if (!array_key_exists(1, $arguments) || $arguments[1] !== self::INIT_OPTION) {
+            return $arguments;
         }
+
+        unset($arguments[1]);
 
         $this->init();
 
-        exit(0);
+        return array_values($arguments);
     }
 
     private function init(): void
@@ -55,7 +74,9 @@ final class Plugin implements HandlesArguments
                 return;
             }
 
-            $this->output->writeln('[OK] Created `tests` directory');
+            $this->output->writeln(
+                '  <fg=black;bg=green;options=bold> OK </> Created `tests` directory.</>',
+            );
         }
 
         foreach (self::STUBS as $from => $to) {
