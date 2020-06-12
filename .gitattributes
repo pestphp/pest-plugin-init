@@ -10,7 +10,7 @@
 .travis.yml        export-ignore
 phpstan.neon       export-ignore
 rector.yaml        export-ignore
-phpunit.xml        export-ignore
+/phpunit.xml       export-ignore
 CHANGELOG.md       export-ignore
 CONTRIBUTING.md    export-ignore
 README.md          export-ignore
