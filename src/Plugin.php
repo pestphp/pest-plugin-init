@@ -75,7 +75,7 @@ final class Plugin implements HandlesArguments
             }
 
             $this->output->writeln(
-                '  <fg=black;bg=green;options=bold> OK </> Created `tests` directory.</>',
+                '  <fg=black;bg=green;options=bold> DONE </> Created `tests` directory.</>',
             );
         }
 
@@ -103,13 +103,13 @@ final class Plugin implements HandlesArguments
             }
 
             $this->output->writeln(sprintf(
-                '  <fg=black;bg=green;options=bold> OK </> Created `%s` file.</>',
+                '  <fg=black;bg=green;options=bold> DONE </> Created `%s` file.</>',
                 $to
             ));
         }
 
         $this->output->writeln(
-            "\n  <fg=black;bg=green;options=bold> OK </> Pest initialised.</>",
+            "\n  <fg=black;bg=green;options=bold> DONE </> Pest initialised.</>",
         );
     }
 }
