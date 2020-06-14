@@ -6,10 +6,14 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## 0.2.2
+### Changed
+- wording `OK` by `DONE`
+
 ## 0.2.1
 ### Added
-- Exports missing phpunit.xml
+- exports missing phpunit.xml
 
 ## 0.2.0
 ### Added
-- First version
+- first version
