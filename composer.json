@@ -45,8 +45,8 @@
         }
     },
     "scripts": {
-        "lint": "php-cs-fixer fix -v",
-        "test:lint": "php-cs-fixer fix -v --dry-run",
+        "lint": "rector process src && php-cs-fixer fix -v",
+        "test:lint": "php-cs-fixer fix -v --dry-run && rector process src --dry-run",
         "test:types": "phpstan analyse --ansi",
         "test": [
             "@test:lint",
