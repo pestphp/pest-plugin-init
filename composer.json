@@ -22,7 +22,7 @@
         }
     },
     "conflict": {
-        "pestphp/pest": "<0.2"
+        "pestphp/pest": "<0.2.3"
     },
     "require-dev": {
         "pestphp/pest": "^0.2",
