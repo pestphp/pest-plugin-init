@@ -109,7 +109,11 @@ final class Plugin implements HandlesArguments
         }
 
         $this->output->writeln(
-            "\n  <fg=black;bg=green;options=bold> DONE </> Pest initialised.</>",
+            "\n  <fg=black;bg=green;options=bold> DONE </> Pest initialised.</>\n",
         );
+
+        (new \Pest\Console\Thanks($this->output))();
+
+        exit(0);
     }
 }
