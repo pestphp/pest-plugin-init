@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Pest\Init;
 
+use Pest\Console\Thanks;
 use Pest\Contracts\Plugins\HandlesArguments;
 use Pest\TestSuite;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -112,7 +113,7 @@ final class Plugin implements HandlesArguments
             "\n  <fg=black;bg=green;options=bold> DONE </> Pest initialised.</>\n",
         );
 
-        (new \Pest\Console\Thanks($this->output))();
+        (new Thanks($this->output))();
 
         exit(0);
     }
