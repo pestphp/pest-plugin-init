@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v0.3.0 (2020-08-27)](https://github.com/pestphp/pest-plugin-init/compare/v0.2.3...v0.3.0)
+### Added
+- Adds support to Pest v0.3
+
 ## [v0.2.3 (2020-07-01)](https://github.com/pestphp/pest-plugin-init/compare/v0.2.2...v0.2.3)
 ### Changed
 - adds thanks output after init ([98920cb](https://github.com/pestphp/pest-plugin-init/commit/98920cb1e8bfab40f597122c6c8ef730ad452641))
