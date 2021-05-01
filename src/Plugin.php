@@ -23,7 +23,7 @@ final class Plugin implements HandlesArguments
      * The files that will be created.
      */
     private const STUBS = [
-        'phpunit.xml'     => 'phpunit.xml',
+        'phpunit.xml'     => 'phpunit.xml.dist',
         'Pest.php'        => 'tests/Pest.php',
         'ExampleTest.php' => 'tests/ExampleTest.php',
     ];
