@@ -23,7 +23,7 @@ final class Plugin implements HandlesArguments
      * The files that will be created.
      */
     private const STUBS = [
-        'phpunit.xml'     => 'phpunit.xml.dist',
+        'phpunit.xml'     => 'phpunit.xml',
         'Pest.php'        => 'tests/Pest.php',
         'ExampleTest.php' => 'tests/ExampleTest.php',
     ];
@@ -87,6 +87,15 @@ final class Plugin implements HandlesArguments
                 $this->output->writeln(sprintf(
                     '  <fg=black;bg=yellow;options=bold> INFO </> File `%s` already exists, skipped.</>',
                     $to
+                ));
+
+                continue;
+            }
+
+            if ($from === 'phpunit.xml' && file_exists($toPath . '.dist') ) {
+                $this->output->writeln(sprintf(
+                    '  <fg=black;bg=yellow;options=bold> INFO </> File `%s` already exists, skipped.</>',
+                    $to . '.dist'
                 ));
 
                 continue;
