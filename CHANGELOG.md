@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [v1.1.0 (2021-05-10)](https://github.com/pestphp/pest-plugin-init/compare/v1.0.0...v1.1.0)
+### Changed
+- Do not create `phpunit.xml` if `phpunit.xml.dist` exists ([#13](https://github.com/pestphp/pest-plugin-init/pull/13))
+
 ## [v1.0.0 (2021-01-03)](https://github.com/pestphp/pest-plugin-init/compare/v0.3.1...v1.0.0)
 ### Changed
 - Stable version
