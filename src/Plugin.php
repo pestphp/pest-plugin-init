@@ -92,7 +92,7 @@ final class Plugin implements HandlesArguments
                 continue;
             }
 
-            if ($from === 'phpunit.xml' && file_exists($toPath . '.dist') ) {
+            if ($from === 'phpunit.xml' && file_exists($toPath . '.dist')) {
                 $this->output->writeln(sprintf(
                     '  <fg=black;bg=yellow;options=bold> INFO </> File `%s` already exists, skipped.</>',
                     $to . '.dist'
